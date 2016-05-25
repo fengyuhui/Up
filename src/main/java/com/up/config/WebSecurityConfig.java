@@ -13,8 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.multipart.MultipartResolver;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 /**
  * Spring Security的配置文件
@@ -44,13 +42,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.antMatchers("/", "/home", "/index", "/auth/registerInput", "/auth/register.action", "/auth/register", "/auth/thankyou", "/registerInput")
+				.antMatchers("/", "/home", "/index", "/auth/register.action", "/auth/register", "/auth/thankyou")
 				.permitAll()
 				.anyRequest()
 				.authenticated()
 				.and()
 				.formLogin()
-				.loginPage("/auth/login")
 				.permitAll()
 				.and()
 				.logout()
@@ -71,9 +68,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		PasswordEncoder encoder = new BCryptPasswordEncoder();
 		return encoder;
 	}
-	
-	@Bean
-    public MultipartResolver filterMultipartResolver() {
-        return new CommonsMultipartResolver();
-    }
 }

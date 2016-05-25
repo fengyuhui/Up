@@ -2,58 +2,40 @@ package com.up;
 
 import javax.servlet.Filter;
 
+import org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.Ordered;
 import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-import org.springframework.web.multipart.support.MultipartFilter;
 
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer {
 	
-	@Bean(name = "filterMultipartResolver")
-	   public CommonsMultipartResolver filterMultipartResolver() {
-	      CommonsMultipartResolver filterMultipartResolver = new CommonsMultipartResolver();
-	      filterMultipartResolver.setDefaultEncoding("utf-8");
-	      filterMultipartResolver.setMaxUploadSize(10240000);
-	      filterMultipartResolver.setMaxInMemorySize(10240000);
-	      return filterMultipartResolver;
-	}
-	
+	/**
+	 * 加入struts2的Filter，相当于web.xml部分对struts2的配置
+	 * @return
+	 */
 	@Bean
-    public FilterRegistrationBean strutsFilterRegistration() {
-
+    public FilterRegistrationBean someFilterRegistration() {
         FilterRegistrationBean registration = new FilterRegistrationBean();
-        registration.setFilter(strutsFilter());
+        registration.setFilter(someFilter());
         registration.addUrlPatterns("/*");
-        registration.setName("strutsFilter");
+        registration.setName("someFilter");
         return registration;
     }
 	
-	@Bean
-	public FilterRegistrationBean multipartFilterRegistration(){
-		FilterRegistrationBean registration = new FilterRegistrationBean();
-        registration.setFilter(multipartFilter());
-        registration.addUrlPatterns("/*");
-        registration.setName("multipartFilter");
-		registration.setOrder(Ordered.HIGHEST_PRECEDENCE);
-		return registration;
-	}
-
-    @Bean(name = "strutsFilter")
-    public Filter strutsFilter() {
-        return new org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter();
+	
+	/**
+	 * 注入struts2所需要的Filter
+	 * @return
+	 */
+    @Bean(name = "someFilter")
+    public Filter someFilter() {
+        return new StrutsPrepareAndExecuteFilter();
     }
     
-    @Bean(name = "multipartFilter")
-    public Filter multipartFilter(){
-    	return new MultipartFilter();
-    }
-	
     /**
      * 注入Hibernate的sessionFactory，以便Dao类中以Autowired方式使用
      * @return 

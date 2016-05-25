@@ -13,7 +13,7 @@
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
 
-<title>follow</title>
+<title>Signin Template for Bootstrap</title>
 
 <!-- Bootstrap core CSS -->
 <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css"
@@ -36,19 +36,21 @@
 <body>
 
 	<div class="container">
-<p><a href="<s:url action='index'/>">我的首页</a></p>
-		<s:form action="addfollow">
-			<h3>add follow</h3>
-			<s:textfield name="username"/><s:property value="message"/>
-			<s:submit value="Yes"/>
-				<sec:csrfInput />
+
+		<s:form cssClass="form-signin" action="register">
+			<h2 class="form-signin-heading">Please sign up</h2>
+			<label for="inputUsername" class="sr-only">Username</label>
+			<s:textfield name='username' id="inputUsername"
+				placeholder="Username" cssClass="form-control" />
+			<label for="inputPassword" class="sr-only">Password</label>
+			<s:password name='password' id="inputPassword" placeholder="Password"
+				cssClass="form-control" />
+			<label for="inputConfirmPassword" class="sr-only">Password</label>
+			<s:password name='confirmPassword' id="inputConfirmPassword"
+				placeholder="Confirm Password" cssClass="form-control" />
+			<s:submit value="Sign Up" cssClass="btn btn-lg btn-primary btn-block" />
+			<sec:csrfInput />
 		</s:form>
-		<s:property value="followname"/>
-		
-		<h1>我关注的人：</h1>
-		<s:iterator value="follownames" id='names'>
-			<p><s:property value='names'/></p><button >取消关注</button><br/>
-		</s:iterator>
 	</div>
 	<!-- /container -->
 

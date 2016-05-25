@@ -4,78 +4,21 @@
     "http://struts.apache.org/dtds/struts-2.5.dtd">
 
 <struts>
-	<include file="follow.xml"/>
+
 	<constant name="struts.devMode" value="true" />
-	<constant name="struts.multipart.parser" value="spring" />
-	<bean type="org.apache.struts2.dispatcher.multipart.MultiPartRequest"
-		name="spring" class="com.up.config.SpringMultipartParser" scope="default" />
 
 	<package name="auth" extends="struts-default" namespace="/auth">
 		<action name="index">
-			<result>/auth/index.jsp</result>
+			<result>/index.jsp</result>
 		</action>
 
 		<action name="hello" class="helloAction" method="execute">
-			<result name="success">/auth/Hello.jsp</result>
+			<result name="success">/Hello.jsp</result>
 		</action>
 
 		<action name="register" class="registerAction" method="execute">
-			<result name="success">/auth/thankyou.jsp</result>
-			<result name="input">/auth/register.jsp</result>
-		</action>
-
-		<action name="registerInput" class="registerAction" method="inputForRegister">
-			<result name="success">/auth/register.jsp</result>
-		</action>
-
-		<action name="login">
-			<result>/auth/login.jsp</result>
-		</action>
-
-		<action name="avatar" class="avatarAction">
-			<result name="success">/auth/avatar.jsp</result>
-			<result name="input">/auth/avatar.jsp</result>
-		</action>
-		
-		<action name="avatarInput" class="avatarAction" method="input">
-			<result name="success">/auth/avatar.jsp</result>
-		</action>
-		
-		<action name="myProfile" class="myProfileAction">
-			<result name="success">/auth/myProfile.jsp</result>
-		</action>
-	</package>
-	
-	<package name="weibo" extends="struts-default" namespace="/weibo">
-		<action name="index">
-			<result>/weibo/index.jsp</result>
-		</action>
-		
-		<action name="publishInput" class="publishAction" method="input">
-			<result name="success">/weibo/publishWeibo.jsp</result>
-		</action>
-		
-		<action name="publish" class="publishAction">
-			<result name="input">/weibo/publishWeibo.jsp</result>
-			<result name="success">/weibo/index.jsp</result>
-		</action>
-		
-		<action name="myWeibo" class="myWeiboAction">
-			<result name="success">/weibo/myWeibo.jsp</result>
-		</action>
-	</package>
-	
-	<package name="search" extends="struts-default" namespace="/search">
-		<action name="index">
-			<result>/search/index.jsp</result>
-		</action>
-	</package>
-	
-	<package name="searchApi" extends="json-default" namespace="/api/search">
-		<action name="searchUser" class="searchUserAction">
-			<result name="success" type="json">
-				 <param name="excludeProperties">passwordHash</param>
-			</result>
+			<result name="success">/thankyou.jsp</result>
+			<result name="input">/register.jsp</result>
 		</action>
 	</package>
 </struts>
