@@ -48,4 +48,9 @@ public class WeiboService implements IWeiboService {
 		return weiboDao.count("select count(w) from WeiboEntity w join w.userEntity u where u.username=?", param);
 	}
 
+	@Override
+	public List<WeiboEntity> getAllWeibo() {
+		return weiboDao.find("from WeiboEntity");
+	}
+
 }

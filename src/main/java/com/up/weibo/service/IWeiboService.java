@@ -8,4 +8,5 @@ public interface IWeiboService {
 	public void publish(String username, String content);
 	public List<WeiboEntity> getWeiboByUsername(String username);
 	public Long getWeiboAmount(String username);
+	public List<WeiboEntity> getAllWeibo();
 }

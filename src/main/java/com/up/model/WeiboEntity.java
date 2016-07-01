@@ -21,6 +21,7 @@ import javax.persistence.Table;
 /**
  * WeiboEntity entity. @author MyEclipse Persistence Tools
  */
+@SuppressWarnings("serial")
 @Entity
 @Table(name="weibo"
     ,catalog="up"
@@ -39,6 +40,7 @@ public class WeiboEntity  implements java.io.Serializable {
      private Double longtitude;
      private String position;
      private Timestamp time;
+     private int agreenum;
      private Set<PictureEntity> pictureEntities = new HashSet<PictureEntity>(0);
      private Set<CommentEntity> commentEntities = new HashSet<CommentEntity>(0);
      private Set<AgreeEntity> agreeEntities = new HashSet<AgreeEntity>(0);
@@ -165,6 +167,16 @@ public class WeiboEntity  implements java.io.Serializable {
     public void setTime(Timestamp time) {
         this.time = time;
     }
+    
+    public int getAgreenum() {
+        return this.agreenum;
+    }
+    
+    public void setAgreenum(int agreenum) {
+        this.agreenum = agreenum;
+    }    
+    
+    
 @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="weiboEntity")
 
     public Set<PictureEntity> getPictureEntities() {
